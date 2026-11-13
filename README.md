@@ -27,6 +27,11 @@ Class weighting is enabled for Logistic Regression, Decision Tree, and Random Fo
 
 ## Revised benchmark results
 
+![Side-by-side bars comparing overall accuracy and High-class recall for six models](images/model_comparison.svg)
+
+*The figure highlights why overall accuracy can conceal failure to detect the rare High-burnout class.*
+
+
 | Model | Accuracy | Balanced accuracy | Macro-F1 | High recall | High precision |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Majority-class baseline | 87.75% | 33.33% | 0.312 | 0.00% | 0.00% |
@@ -47,16 +52,16 @@ pip install -r requirements.txt
 python src/burnout_classification.py
 ```
 
-The script reads `data/tech_mental_health_burnout.csv` (included in the [downloadable portfolio archive](https://github.com/NouhaBoukhris/employee-burnout-classification); upload to `data/` if absent) and writes performance metrics and confusion matrices to `results/`.
+The script reads the included [`data/tech_mental_health_burnout.csv`](data/tech_mental_health_burnout.csv) and writes performance metrics and confusion matrices to `results/`.
 
 ## Repository contents
 
 - [`src/burnout_classification.py`](src/burnout_classification.py) — revised modeling code.
 - [`results/`](results/) — benchmark scores, summary and confusion matrices.
-- `data/tech_mental_health_burnout.csv` — Kaggle synthetic input (upload separately; check redistribution terms).
-- `docs/original_coursework.py` — original academic script (upload separately if needed).
-- `docs/original_report.docx` — updated original report with corrected Drive link (upload separately).
-- `docs/presentation.pdf` — original 21-slide presentation (upload separately).
+- [`data/tech_mental_health_burnout.csv`](data/tech_mental_health_burnout.csv) — Kaggle synthetic input; review source licensing before redistribution.
+- [`docs/original_coursework.py`](docs/original_coursework.py) — original academic script.
+- [`docs/original_report.docx`](docs/original_report.docx) — updated original report with corrected Drive link.
+- [`docs/presentation.pdf`](docs/presentation.pdf) — original 21-slide presentation.
 
 **Note:** The original academic report and presentation retain the original model results and class-label narrative; the revised benchmark above is deliberately separate.
 
