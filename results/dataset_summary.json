@@ -1,0 +1,13 @@
+{
+  "rows": 150000,
+  "columns": 25,
+  "class_distribution": {
+    "Low": 131620,
+    "Moderate": 18315,
+    "High": 65
+  },
+  "train_rows": 120000,
+  "test_rows": 30000,
+  "features_exclude": ["burnout_level", "burnout_score"],
+  "random_state": 42
+}
