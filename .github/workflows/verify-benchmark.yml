@@ -1,0 +1,33 @@
+name: Verify burnout benchmark outputs
+on:
+  push:
+    paths:
+      - 'src/burnout_classification.py'
+      - 'data/tech_mental_health_burnout.csv'
+      - 'results/model_comparison.csv'
+      - '.github/workflows/verify-benchmark.yml'
+  workflow_dispatch:
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Save committed benchmark metrics for comparison
+        run: cp results/model_comparison.csv /tmp/expected-model-comparison.csv
+      - name: Recompute benchmark
+        run: python src/burnout_classification.py
+      - name: Compare recomputed and committed metrics
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          from pandas.testing import assert_frame_equal
+          a=pd.read_csv('/tmp/expected-model-comparison.csv').sort_values('model').reset_index(drop=True)
+          b=pd.read_csv('results/model_comparison.csv').sort_values('model').reset_index(drop=True)
+          assert_frame_equal(a,b,check_exact=False,rtol=1e-6,atol=1e-8)
+          print('All saved benchmark metrics match recomputed metrics.')
+          PY
